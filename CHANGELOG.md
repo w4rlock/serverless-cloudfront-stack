@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/w4rlock/serverless-cdn-stack/compare/0.1.0...0.1.1) (2020-04-17)
+
+
+### Bug Fixes
+
+* plugin path ([99598e1](https://github.com/w4rlock/serverless-cdn-stack/commit/99598e14ebaf528945f414f79b25efd67e20aacb))
+* readme ([f93ee66](https://github.com/w4rlock/serverless-cdn-stack/commit/f93ee667e0ca83d481f4e2b4caccfaa725e56191))
+* readme ([616b36c](https://github.com/w4rlock/serverless-cdn-stack/commit/616b36cdfd623edf74ea8cbbcd365f37cc7933a3))
+
 ## [0.1.0](https://github.com/w4rlock/serverless-cdn-stack/compare/0.0.3...0.1.0) (2020-04-17)
 
 ### [0.0.3](https://github.com/w4rlock/serverless-cdn-stack/compare/0.0.2...0.0.3) (2020-04-17)
