@@ -1,0 +1,19 @@
+Resources:
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Fn::Sub: "${StaticWebSiteBucket}"
+      PolicyDocument:
+        Statement:
+          -
+            Sid: "PublicReadGetObject"
+            Action:
+              - "s3:GetObject"
+            Effect: Allow
+            Resource:
+              Fn::Sub: "arn:aws:s3:::${StaticWebSiteBucket}/*"
+            Principal:
+              AWS:
+                Fn::Sub: "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${CloudFrontOriginAccessIdentity}"
+

@@ -1,0 +1,40 @@
+service: cdn-stack
+provider: aws
+
+plugins:
+  - serverless-cdn-stack
+
+custom:
+  cdnStack:
+    # disabled this plugin
+    disabled: false
+    # run another plugin action for you need set credentials
+    beforeSpawn: 'vault:auth:aws'
+    # cloud front distribution alias
+    cname: poc.develop.teamname.us-east-1.aws.com
+    # create route53 cname record
+    createInRoute53: true
+    # required for cname
+    # certificate: arn:aws:acm:us-east-1:xxxxxxx:certificate/xxxx-xxxx-xxxx
+    # certificate: 'develop.teamname.us-east-1.aws.com'
+    # certificate: '.develop.teamname.us-east-1.aws.com'
+    certificate: poc.develop.teamname.us-east-1.aws.com
+
+    bucketName: poc.develop.teamname
+    indexPage: index.html
+    errorPage: error.html
+    syncLocalFolder: dist
+
+    # optional default PriceClass_100
+    priceClass: PriceClass_All
+
+    # after deploy print stack output
+    printStackOutput: true
+
+    # optional tag
+    logging:
+      bucketName: poc.develop.teamname.access.logs
+      # optional default "Access/"
+      preffix: 'audit-access/'
+      # optional default "21" days
+      retentionDays: 21

@@ -1,0 +1,16 @@
+Resources:
+  StaticWebSiteBucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Retain
+    Properties:
+      AccessControl: Private
+      BucketName: {{ bucketName }}
+      WebsiteConfiguration:
+        IndexDocument: {{ indexPage }}
+        ErrorDocument: {{ errorPage }}
+
+Outputs:
+  BucketWebSite:
+    Description: 'Static web site bucket url'
+    Value:
+      Fn::Sub: 'https://s3.console.aws.amazon.com/s3/buckets/${StaticWebSiteBucket}'

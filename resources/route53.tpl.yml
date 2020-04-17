@@ -1,0 +1,25 @@
+Resources:
+  DnsRecord:
+    Type: 'AWS::Route53::RecordSet'
+    DependsOn:
+      - CloudFrontDistribution
+    Properties:
+      Comment: 'Alias CloudFront to'
+      HostedZoneId: {{ zoneId }}
+      Type: A
+      Name: {{ cname }}
+      AliasTarget:
+        DNSName:
+          Fn::Sub: '${CloudFrontDistribution.DomainName}'
+        # Default (static) hosted zone for CloudFront
+        # important keep hardcoded
+        HostedZoneId: 'Z2FDTNDATAQYW2'
+
+Outputs:
+  WebsiteURL:
+    Description: 'is an alias to cloud front cdn'
+    Value:
+      Fn::Sub: "https://${DnsRecord}"
+    #Export:
+      #Name: 'SiteUrl-${self:custom.app.name}'
+

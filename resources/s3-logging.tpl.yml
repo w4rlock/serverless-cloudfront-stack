@@ -1,0 +1,24 @@
+Resources:
+  AccessLogsBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: {{ logging.bucketName }}
+      AccessControl: LogDeliveryWrite
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      {{#if logging.retentionDays }}
+      LifecycleConfiguration:
+        Rules:
+          - ExpirationInDays: {{ logging.retentionDays }}
+            Status: Enabled
+            Id: "BUCKET_ACCESS_LOGS_EXPIRATION_{{ logging.retentionDays }}_DAYS"
+            NoncurrentVersionExpirationInDays: {{ logging.retentionDays }}
+      {{/if}}
+
+Outputs:
+  AccessLogsBucket:
+    Description: 'Access Logs bucket url'
+    Value:
+      Fn::Sub: 'https://s3.console.aws.amazon.com/s3/buckets/${AccessLogsBucket}'
