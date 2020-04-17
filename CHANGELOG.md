@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.2 (2020-04-17)
+
+
+### Features
+
+* change name ([1382e81](https://github.com/w4rlock/serverless-cdn-stack/commit/1382e81aa73591233ce593c61815240621e8ba1b))
+* fc ([e31a5ab](https://github.com/w4rlock/serverless-cdn-stack/commit/e31a5ab900b75059f3effa8504b0a3a9f76ac2e9))
+
 ### [0.0.2](https://github.com/w4rlock/serverless-cdn-stack/compare/0.0.1...0.0.2) (2020-04-17)
 
 
