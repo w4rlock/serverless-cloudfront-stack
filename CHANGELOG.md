@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/w4rlock/serverless-cdn-stack/compare/0.0.2...0.0.3) (2020-04-17)
+
+
+### Features
+
+* add encryption and access policy ([cde9fb1](https://github.com/w4rlock/serverless-cdn-stack/commit/cde9fb197ce48b7e0d99156f6cc036ab07d0be50))
+
 ### 0.0.2 (2020-04-17)
 
 
