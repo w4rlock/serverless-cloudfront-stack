@@ -1,6 +1,6 @@
 {
-  "name": "serverless-cdn-stack",
-  "version": "0.0.2",
+  "name": "serverless-cloudfront-stack",
+  "version": "0.0.1",
   "description": "Serverless Cdn Stack",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "release:major": "npm run release -- --release-as major",
     "release:minor": "npm run release -- --release-as minor",
     "release:patch": "npm run release -- --release-as patch",
-    "unpublish": "npx force-unpublish serverless-cdn-stack 'npmrc remove module'"
+    "unpublish": "npx force-unpublish serverless-cloudfront-stack 'npmrc remove module'"
   },
   "husky": {
     "hooks": {

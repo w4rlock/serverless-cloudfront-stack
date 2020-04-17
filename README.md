@@ -3,13 +3,13 @@
 </p>
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
-[![npm version](https://badge.fury.io/js/serverless-cdn-stack.svg)](https://badge.fury.io/js/serverless-cdn-stack)
-[![npm downloads](https://img.shields.io/npm/dt/serverless-cdn-stack.svg?style=flat)](https://www.npmjs.com/package/serverless-cdn-stack)
+[![npm version](https://badge.fury.io/js/serverless-cloudfront-stack.svg)](https://badge.fury.io/js/serverless-cloudfront-stack)
+[![npm downloads](https://img.shields.io/npm/dt/serverless-cloudfront-stack.svg?style=flat)](https://www.npmjs.com/package/serverless-cloudfront-stack)
 
 
 ### Installation
 ```bash
-npm i -E serverless-cdn-stack
+npm i -E serverless-cloudfront-stack
 ```
 
 ### Features
@@ -30,7 +30,7 @@ npm i -E serverless-cdn-stack
 ### Usage
 ```yaml
 plugins:
-  - serverless-cdn-stack
+  - serverless-cloudfront-stack
 
 custom:
   cdnStack:

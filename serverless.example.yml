@@ -2,7 +2,7 @@ service: cdn-stack
 provider: aws
 
 plugins:
-  - serverless-cdn-stack
+  - serverless-cloudfront-stack
 
 custom:
   cdnStack:
