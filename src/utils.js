@@ -66,7 +66,7 @@ module.exports = {
    * @returns {object} obj rendered
    */
   render(filePath, data) {
-    const fileAbsPath = path.resolve(filePath);
+    const fileAbsPath = path.resolve(this.pluginPath, filePath);
     const fileContent = this.readFile(fileAbsPath);
     const template = this.compileHandlebar(fileContent, data);
     const ymlContent = this.yamlLoad(template);

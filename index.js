@@ -20,12 +20,13 @@ class ServerlessPlugin extends BaseServerlessPlugin {
     super(serverless, options, LOG_PREFFIX, USR_CONF);
     Object.assign(this, externalPlugins, loadConfig, utils, awsUtils);
 
+    this.pluginPath = __dirname;
+    this.onceInit = _.once(() => this.initialize());
+    this.addExternalsPlugins();
+
     this.hooks = {
       'package:initialize': this.dispatchAction.bind(this, this.injectTemplate),
     };
-
-    this.onceInit = _.once(() => this.initialize());
-    this.addExternalsPlugins();
   }
 
   /**
