@@ -43,27 +43,27 @@ plugins:
 
 custom:
   cdnStack:
-    disabled: false                 # optional, disabled this plugin
-    beforeSpawn: ''                 # optional, run another hook plugin
+    disabled: false                               # optional, disabled this plugin
+    beforeSpawn: ''                               # optional, run another hook plugin
 
-    cname: ''                       # optional, cname for cdn.
-    createInRoute53: false          # optional, default true, create cname record
-    certificate: ''                 # required, if use cname
+    cname: ''                                     # optional, cname for cdn.
+    createInRoute53: false                        # optional, default true, create cname record
+    certificate: ''                               # required, if use cname
 
-    bucketName: ''                  # required, app bucket name
-    blockPublicAccess: true         # optional, block public acccess to s3
-    bucketEncryption: false         # optional, bucket encryption for AES256
+    bucketName: ''                                # required, app bucket name
+    blockPublicAccess: true                       # optional, block public acccess to s3
+    bucketEncryption: false                       # optional, bucket encryption for AES256
 
-    indexPage: ''                   # optional, default index.html
-    errorPage: ''                   # optional, error page
+    indexPage: ''                                 # optional, default index.html
+    errorPage: ''                                 # optional, error page
 
-    syncLocalFolder: ''             # required, folder path to sync with s3
-    priceClass: ''                  # optional, default 'PriceClass_100'
+    syncLocalFolder: ''                           # required, folder path to sync with s3
+    priceClass: ''                                # optional, default 'PriceClass_100'
 
-    logging:                        # optional tag
-      bucketName: ''                # required, logs bucket name
-      preffix: ''                   # optional, default 'Access/'
-      retentionDays: 7              # optional, default 21 days
+    logging:                                      # optional tag
+      bucketName: ''                              # required, logs bucket name
+      preffix: ''                                 # optional, default 'Access/'
+      retentionDays: 7                            # optional, default 21 days
 
 
 # psss. check full example in serverless.example.yml file.
