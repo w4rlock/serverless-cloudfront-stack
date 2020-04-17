@@ -25,14 +25,13 @@ module.exports = {
       );
     }
 
-
     // Optionals
     this.cfg.beforeSpawn = this.getConf('beforeSpawn', false);
     this.cfg.indexPage = this.getConf('indexPage', false, 'index.html');
     this.cfg.errorPage = this.getConf('errorPage', false, 'error.html');
     this.cfg.priceClass = this.getConf('priceClass', false, 'PriceClass_100');
-    this.cfg.printStackOutput = this.getConf('printStackOutput', false, true);
-
+    this.cfg.blockPublicAccess = this.getConf('blockPublicAccess', false, true);
+    this.cfg.bucketEncryption = this.getConf('bucketEncryption', false, false);
 
     // Optionals
     this.cfg.logging = this.getConf('logging', false, {});

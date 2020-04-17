@@ -4,10 +4,21 @@ Resources:
     Properties:
       BucketName: {{ logging.bucketName }}
       AccessControl: LogDeliveryWrite
+      {{#if bucketEncryption }}
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: AES256
+      {{/if}}
+
+      {{#if blockPublicAccess }}
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      {{/if}}
+
       {{#if logging.retentionDays }}
       LifecycleConfiguration:
         Rules:

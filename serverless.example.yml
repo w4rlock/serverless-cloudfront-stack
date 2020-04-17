@@ -21,15 +21,17 @@ custom:
     certificate: poc.develop.teamname.us-east-1.aws.com
 
     bucketName: poc.develop.teamname
+    # optional, block public acccess to s3
+    blockPublicAccess: true
+    # optional. default false  AES256
+    bucketEncryption: true
+
     indexPage: index.html
     errorPage: error.html
     syncLocalFolder: dist
 
     # optional default PriceClass_100
     priceClass: PriceClass_All
-
-    # after deploy print stack output
-    printStackOutput: true
 
     # optional tag
     logging:

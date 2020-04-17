@@ -21,15 +21,11 @@ class ServerlessPlugin extends BaseServerlessPlugin {
     Object.assign(this, externalPlugins, loadConfig, utils, awsUtils);
 
     this.hooks = {
-      'after:deploy:deploy': this.dispatchAction.bind(this, this.afterDeploy),
-      'package:initialize': this.dispatchAction.bind(
-        this,
-        this.prepareResources
-      ),
+      'package:initialize': this.dispatchAction.bind(this, this.injectTemplate),
     };
 
-    this.addExternalsPlugins();
     this.onceInit = _.once(() => this.initialize());
+    this.addExternalsPlugins();
   }
 
   /**
@@ -69,7 +65,7 @@ class ServerlessPlugin extends BaseServerlessPlugin {
    * to CloudFormation template
    *
    */
-  async prepareResources() {
+  async injectTemplate() {
     // when use a cnme for cdn is required a ssl cert arn
     if (this.cfg.resolveCertificateArn) {
       this.cfg.certificate = await this.getCertificateArn(this.cfg.certificate);
@@ -102,16 +98,6 @@ class ServerlessPlugin extends BaseServerlessPlugin {
     const cf = this.serverless.service.provider.compiledCloudFormationTemplate;
 
     resources.forEach((res) => _.merge(cf, res));
-  }
-
-  /**
-   * After Deploy print Cloud Formation Stack
-   *
-   */
-  async afterDeploy() {
-    if (!_.isEmpty(this.cfg.printStackOutput)) {
-      await this.describeStack();
-    }
   }
 }
 

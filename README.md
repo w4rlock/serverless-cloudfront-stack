@@ -14,44 +14,56 @@ npm i -E serverless-cloudfront-stack
 
 ### Features
 ```yaml
-- S3 - Bucket for your app assets.
-- S3 - Bucket for access logs.
-- S3 - Retention days for logs.
-- Cloud Front Distribution (CDN).
-- CDN - SSL support.
-- CDN - Access Logs.
-- Route53 - record for your CDN.
-- CF - Print all Stack output
+S3
+- Bucket for your app assets.
+- Bucket access control.
+- Bucket encryption support for AES256.
+- Bucket for cdn access logs.
+- Data rentention by days for access logs.
 
-- Invalidate Cdn cache on new deploys.
+Cloud Front Distribution
+- SSL support.
+- Access Logs.
+- Cname support.
+
+Route53
+- Record for your CDN.
+
+Extras
+- Invalidate CloudFront cache on new deploys.
 - Sync your local assets folder with s3 on new deploys.
 ```
 
 ### Usage
 ```yaml
+# serverless.yml
+
 plugins:
   - serverless-cloudfront-stack
 
 custom:
   cdnStack:
-    disabled: false                    # optional, disabled this plugin
-    beforeSpawn: ''                    # optional, run another hook plugin
+    disabled: false           # optional, disabled this plugin
+    beforeSpawn: ''           # optional, run another hook plugin
 
-    cname: ''                          # optional, cname for cdn.
-    createInRoute53: false             # optional, default true, create cname record
-    certificate: ''                    # required, if use cname
+    cname: ''                 # optional, cname for cdn.
+    createInRoute53: false    # optional, default true, create cname record
+    certificate: ''           # required, if use cname
 
-    bucketName: ''                     # required, app bucket name
-    indexPage: ''                      # optional, default index.html
-    errorPage: ''                      # optional, error page
-    syncLocalFolder: ''                # required, folder path to sync with s3
-    priceClass: ''                     # optional, default 'PriceClass_100'
-    printStackOutput: true             # optional, after deploy print stack ouput
+    bucketName: ''            # required, app bucket name
+    blockPublicAccess: true   # optional, block public acccess to s3
+    bucketEncryption: false   # optional, bucket encryption for AES256
 
-    logging:                           # optional tag
-      bucketName: ''                   # required, logs bucket name
-      preffix: ''                      # optional, default 'Access/'
-      retentionDays:                   # optional, default 21 days
+    indexPage: ''             # optional, default index.html
+    errorPage: ''             # optional, error page
+
+    syncLocalFolder: ''       # required, folder path to sync with s3
+    priceClass: ''            # optional, default 'PriceClass_100'
+
+    logging:                  # optional tag
+      bucketName: ''          # required, logs bucket name
+      preffix: ''             # optional, default 'Access/'
+      retentionDays: 7          # optional, default 21 days
 
 
 # psss. check full example in serverless.example.yml file.
