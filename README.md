@@ -78,15 +78,18 @@ custom:
 ### Extends
 ```yaml
 # serverless.yml
+
 resources:
   Resources:
     StaticWebSiteBucket:
       Properties:
         BucketName: override bucket name
+        ...
         
     DnsRecord:
       Properties:
         Comment: override comment
+        ...
         
     CloudFrontDistribution:
       ...
