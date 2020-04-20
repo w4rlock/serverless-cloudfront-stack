@@ -97,8 +97,23 @@ class ServerlessPlugin extends BaseServerlessPlugin {
   addResource(resource) {
     const resources = [].concat(resource);
     const cf = this.serverless.service.provider.compiledCloudFormationTemplate;
+    const allUsrRes = _.get(this.serverless, 'service.resources.Resources', {});
 
-    resources.forEach((res) => _.merge(cf, res));
+    resources.forEach((res) => {
+      // extends template base support
+      if (!_.isEmpty(res.Resources)) {
+        // iteration object resources keys
+        _.forEach(res.Resources, (val, key) => {
+          const baseRes = res.Resources[key];
+          const usrRes = allUsrRes[key];
+          // user can override all templates properties
+          if (!_.isEmpty(usrRes)) {
+            _.merge(baseRes, usrRes);
+          }
+        });
+      }
+      _.merge(cf, res);
+    });
   }
 }
 
