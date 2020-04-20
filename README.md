@@ -32,7 +32,13 @@ Route53
 Extras
 - Invalidate CloudFront cache on new deploys.
 - Sync your local assets folder with s3 on new deploys.
+- Extends resources. 
 ```
+### Diagram
+
+<p align="center">
+  <img alt="Aws Designer" width="680" height="540" src="https://user-images.githubusercontent.com/621906/79576361-881a5480-8099-11ea-83f5-f138a415a237.png">
+</p>
 
 ### Usage
 ```yaml
@@ -69,7 +75,26 @@ custom:
 # psss. check full example in serverless.example.yml file.
 ```
 
+### Extends
+```yaml
+# serverless.yml
 
-<p align="center">
-  <img alt="Aws Designer" width="650" height="520" src="https://user-images.githubusercontent.com/621906/79576361-881a5480-8099-11ea-83f5-f138a415a237.png">
-</p>
+resources:
+  Resources:
+    StaticWebSiteBucket:
+      Properties:
+        BucketName: override bucket name
+        ...
+        
+    DnsRecord:
+      Properties:
+        Comment: override comment
+        ...
+        
+    CloudFrontDistribution:
+      ...
+      
+    AccessLogsBucket:
+      ...
+      
+```
