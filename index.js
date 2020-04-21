@@ -11,6 +11,7 @@ const USR_CONF = 'cdnStack';
 
 
 class ServerlessPlugin extends BaseServerlessPlugin {
+  var a = 1;
   /**
    * Default Constructor
    *
