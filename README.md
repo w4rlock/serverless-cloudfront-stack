@@ -3,6 +3,7 @@
 </p>
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
+[![CI](https://github.com/w4rlock/serverless-cloudfront-stack/workflows/CI/badge.svg)
 [![npm version](https://badge.fury.io/js/serverless-cloudfront-stack.svg)](https://badge.fury.io/js/serverless-cloudfront-stack)
 [![npm downloads](https://img.shields.io/npm/dt/serverless-cloudfront-stack.svg?style=flat)](https://www.npmjs.com/package/serverless-cloudfront-stack)
 
