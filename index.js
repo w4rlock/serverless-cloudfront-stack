@@ -9,6 +9,7 @@ const awsUtils = require('./src/aws.utils');
 const LOG_PREFFIX = '[ServerlessCdnStack] -';
 const USR_CONF = 'cdnStack';
 
+
 class ServerlessPlugin extends BaseServerlessPlugin {
   /**
    * Default Constructor
