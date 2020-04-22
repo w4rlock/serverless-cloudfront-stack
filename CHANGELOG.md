@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/w4rlock/serverless-cdn-stack/compare/0.2.0...0.3.0) (2020-04-22)
+
+
+### Features
+
+* add bucket versioning ([b9ae580](https://github.com/w4rlock/serverless-cdn-stack/commit/b9ae58042c3ff57c0980b4fbbecb9b08057bd103))
+
 ## [0.2.0](https://github.com/w4rlock/serverless-cdn-stack/compare/0.1.1...0.2.0) (2020-04-20)
 
 
