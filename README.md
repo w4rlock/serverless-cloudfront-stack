@@ -19,6 +19,7 @@ S3
 - Bucket for your app assets.
 - Bucket access control.
 - Bucket encryption support for AES256.
+- Bucket versioning for your assets.
 - Bucket for cdn access logs.
 - Data rentention by days for access logs.
 
@@ -33,7 +34,7 @@ Route53
 Extras
 - Invalidate CloudFront cache on new deploys.
 - Sync your local assets folder with s3 on new deploys.
-- Extends resources. 
+- Extends resources.
 ```
 ### Diagram
 
@@ -60,6 +61,7 @@ custom:
     bucketName: ''                                # required, app bucket name
     blockPublicAccess: true                       # optional, block public acccess to s3
     bucketEncryption: false                       # optional, bucket encryption for AES256
+    bucketVersioning: false                       # optional, assets object versioning (backup)
 
     indexPage: ''                                 # optional, default index.html
     errorPage: ''                                 # optional, error page
@@ -86,16 +88,16 @@ resources:
       Properties:
         BucketName: override bucket name
         ...
-        
+
     DnsRecord:
       Properties:
         Comment: override comment
         ...
-        
+
     CloudFrontDistribution:
       ...
-      
+
     AccessLogsBucket:
       ...
-      
+
 ```
