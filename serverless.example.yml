@@ -25,6 +25,8 @@ custom:
     blockPublicAccess: true
     # optional. default false  AES256
     bucketEncryption: true
+    # bucket Object history for your assets
+    bucketVersioning: false
 
     indexPage: index.html
     errorPage: error.html

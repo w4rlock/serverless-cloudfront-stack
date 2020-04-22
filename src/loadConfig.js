@@ -32,6 +32,7 @@ module.exports = {
     this.cfg.priceClass = this.getConf('priceClass', false, 'PriceClass_100');
     this.cfg.blockPublicAccess = this.getConf('blockPublicAccess', false, true);
     this.cfg.bucketEncryption = this.getConf('bucketEncryption', false, false);
+    this.cfg.bucketVersioning = this.getConf('bucketVersioning', false, false);
 
     // Optionals
     this.cfg.logging = this.getConf('logging', false, {});

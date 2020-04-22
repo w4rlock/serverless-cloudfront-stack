@@ -72,20 +72,20 @@ class ServerlessPlugin extends BaseServerlessPlugin {
       this.cfg.certificate = await this.getCertificateArn(this.cfg.certificate);
     }
 
-    this.addResource([
-      this.render('./resources/s3-bucket.tpl.yml', this.cfg),
-      this.render('./resources/s3-policy.tpl.yml', this.cfg),
-      this.render('./resources/cloudfront-identify.tpl.yml', this.cfg),
-      this.render('./resources/cloudfront.tpl.yml', this.cfg),
-    ]);
-
     if (!_.isEmpty(this.cfg.logging)) {
-      this.addResource(this.render('./resources/s3-logging.tpl.yml', this.cfg));
+      this.addResource(this.render('./resources/s3-logging.hbs', this.cfg));
     }
+
+    this.addResource([
+      this.render('./resources/s3-bucket.hbs', this.cfg),
+      this.render('./resources/s3-policy.hbs', this.cfg),
+      this.render('./resources/cloudfront-identify.hbs', this.cfg),
+      this.render('./resources/cloudfront.hbs', this.cfg),
+    ]);
 
     if (this.cfg.createInRoute53) {
       this.cfg.zoneId = await this.getHostedZoneId(this.cfg.cname);
-      this.addResource(this.render('./resources/route53.tpl.yml', this.cfg));
+      this.addResource(this.render('./resources/route53.hbs', this.cfg));
     }
   }
 

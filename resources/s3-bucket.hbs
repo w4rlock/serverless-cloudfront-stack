@@ -5,15 +5,23 @@ Resources:
     Properties:
       AccessControl: Private
       BucketName: {{ bucketName }}
+
+      {{#if bucketVersioning }}
+      VersioningConfiguration:
+        Status: Enabled
+      {{/if}}
+
       {{#if bucketEncryption }}
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: AES256
       {{/if}}
+
       WebsiteConfiguration:
         IndexDocument: {{ indexPage }}
         ErrorDocument: {{ errorPage }}
+
       {{#if blockPublicAccess }}
       PublicAccessBlockConfiguration:
         BlockPublicAcls: true
