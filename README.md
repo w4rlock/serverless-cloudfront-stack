@@ -28,7 +28,7 @@ Cloud Front Distribution
 - Access Logs.
 - Cname support.
 
-Route53
+Route53 - Domain Name
 - Record for your CDN.
 
 Extras
