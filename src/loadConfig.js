@@ -10,13 +10,13 @@ module.exports = {
     this.cfg.bucketName = this.getConf('bucketName');
     this.cfg.syncLocalFolder = this.getConf('syncLocalFolder');
 
-    this.cfg.cname = this.getConf('cname', false);
+    this.cfg.cname = this.getConf('cname', '');
 
     // cname is nil do not create record !
     if (_.isEmpty(this.cfg.cname)) {
       this.cfg.createInRoute53 = false;
     } else {
-      this.cfg.createInRoute53 = this.getConf('createInRoute53', false, true);
+      this.cfg.createInRoute53 = this.getConf('createInRoute53', true);
       // if use cname a ssl certificate is required
       this.cfg.certificate = this.getConf('certificate');
       // resolve certificate if certificate is a domain name
@@ -27,34 +27,31 @@ module.exports = {
 
     // Optionals
     this.cfg.beforeSpawn = this.getConf('beforeSpawn', false);
-    this.cfg.indexPage = this.getConf('indexPage', false, 'index.html');
-    this.cfg.errorPage = this.getConf('errorPage', false, 'error.html');
-    this.cfg.priceClass = this.getConf('priceClass', false, 'PriceClass_100');
-    this.cfg.blockPublicAccess = this.getConf('blockPublicAccess', false, true);
-    this.cfg.bucketEncryption = this.getConf('bucketEncryption', false, false);
-    this.cfg.bucketVersioning = this.getConf('bucketVersioning', false, false);
+    this.cfg.indexPage = this.getConf('indexPage', 'index.html');
+    this.cfg.errorPage = this.getConf('errorPage', 'error.html');
+    this.cfg.priceClass = this.getConf('priceClass', 'PriceClass_100');
+    this.cfg.blockPublicAccess = this.getConf('blockPublicAccess', true);
+    this.cfg.bucketEncryption = this.getConf('bucketEncryption', false);
+    this.cfg.bucketVersioning = this.getConf('bucketVersioning', false);
 
     // Optionals
-    this.cfg.logging = this.getConf('logging', false, {});
+    this.cfg.logging = this.getConf('logging', {});
     if (!_.isEmpty(this.cfg.logging)) {
       // required if logging is set
       this.cfg.logging.bucketName = this.getConf('logging.bucketName');
 
       this.cfg.logging.preffix = this.getConf(
         'logging.preffix',
-        false,
         'Access/'
       );
 
       this.cfg.logging.retentionDays = this.getConf(
         'logging.retentionDays',
-        false,
         21
       );
 
       this.cfg.logging.createBucketIfNeed = this.getConf(
         'logging.createBucketIfNeed',
-        false,
         true
       );
     }

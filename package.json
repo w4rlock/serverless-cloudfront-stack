@@ -27,7 +27,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "base-serverless-plugin": "^0.1.3",
+    "base-serverless-plugin": "0.1.5",
     "handlebars": "4.7.6",
     "js-yaml": "3.13.1",
     "lodash": "^4.17.15",
