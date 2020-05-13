@@ -59,6 +59,12 @@ Resources:
         {{/if}}
 
 Outputs:
+  CloudFrontDomain:
+    Description: 'CloudFront Domain'
+    Value:
+      Fn::Sub: '${CloudFrontDistribution.DomainName}'
+
+
   CloudFrontUrl:
     Description: 'URL de CloudFront'
     Value:
