@@ -1,6 +1,6 @@
 {
   "name": "serverless-cloudfront-stack",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Serverless Cdn Stack",
   "main": "index.js",
   "scripts": {
