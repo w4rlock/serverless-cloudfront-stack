@@ -29,7 +29,7 @@ Resources:
         PriceClass: {{ priceClass }}
         # required for cname field
         ViewerCertificate:
-          {{#if cname}}
+          {{#if certificate}}
           AcmCertificateArn: {{ certificate }}
           SslSupportMethod: sni-only
           {{else}}
