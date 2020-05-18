@@ -13,16 +13,17 @@ module.exports = {
     this.cfg.cname = this.getConf('cname', '');
 
     // cname is nil do not create record !
-    this.cfg.createInRoute53 =
-      !_.isEmpty(this.cfg.cname) && this.getConf('createInRoute53', false);
-
-    // if use cname a ssl certificate is required
-    // or for cloudflare is required
-    this.cfg.certificate = this.getConf('certificate', '');
-    // resolve certificate if certificate is a domain name
-    this.cfg.resolveCertificateArn =
-      !_.isEmpty(this.cfg.certificate) &&
-      !this.cfg.certificate.includes('arn:aws:acm');
+    if (_.isEmpty(this.cfg.cname)) {
+      this.cfg.createInRoute53 = false;
+    } else {
+      this.cfg.createInRoute53 = this.getConf('createInRoute53', false);
+      // if use cname a ssl certificate is required
+      this.cfg.certificate = this.getConf('certificate');
+      // resolve certificate if certificate is a domain name
+      this.cfg.resolveCertificateArn = !this.cfg.certificate.includes(
+        'arn:aws:acm'
+      );
+    }
 
     // Optionals
     this.cfg.beforeSpawn = this.getConf('beforeSpawn', false);
@@ -39,7 +40,10 @@ module.exports = {
       // required if logging is set
       this.cfg.logging.bucketName = this.getConf('logging.bucketName');
 
-      this.cfg.logging.preffix = this.getConf('logging.preffix', 'Access/');
+      this.cfg.logging.preffix = this.getConf(
+        'logging.preffix',
+        'Access/'
+      );
 
       this.cfg.logging.retentionDays = this.getConf(
         'logging.retentionDays',
