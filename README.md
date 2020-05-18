@@ -55,7 +55,7 @@ custom:
     beforeSpawn: ''                               # optional, run another hook plugin
 
     cname: ''                                     # optional, cname for cdn.
-    createInRoute53: false                        # optional, default true, create cname record
+    createInRoute53: false                        # optional, default false, create cname record
     certificate: ''                               # required, if use cname
 
     bucketName: ''                                # required, app bucket name
