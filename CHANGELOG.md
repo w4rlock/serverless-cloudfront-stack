@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.5](https://github.com/w4rlock/serverless-cdn-stack/compare/0.3.4...0.3.5) (2020-05-18)
+
+
+### Bug Fixes
+
+* ssl resolve arn condition ([c309b84](https://github.com/w4rlock/serverless-cdn-stack/commit/c309b84607689351616f099c7354a89541d8f65f))
+
 ### [0.3.4](https://github.com/w4rlock/serverless-cdn-stack/compare/0.3.3...0.3.4) (2020-05-13)
 
 
