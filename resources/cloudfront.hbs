@@ -24,9 +24,14 @@ Resources:
           ViewerProtocolPolicy: redirect-to-https
 
         Enabled: true
+
+        {{#if bucketWebHosting}}
         DefaultRootObject: {{ indexPage }}
+        {{/if}}
+
         HttpVersion: "http2"
         PriceClass: {{ priceClass }}
+
         # required for cname field
         ViewerCertificate:
           {{#if certificate}}
@@ -35,6 +40,7 @@ Resources:
           {{else}}
           CloudFrontDefaultCertificate: 'true'
           {{/if}}
+
         IPV6Enabled: false
         Origins:
           - DomainName:
@@ -43,6 +49,8 @@ Resources:
             S3OriginConfig:
               OriginAccessIdentity:
                 Fn::Sub: "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}"
+
+        {{#if bucketWebHosting}}
         CustomErrorResponses:
           - ErrorCode: 404
             ResponseCode: 200
@@ -50,8 +58,9 @@ Resources:
           - ErrorCode: 403
             ResponseCode: 200
             ResponsePagePath: /{{ indexPage }}
+        {{/if}}
 
-        {{#if logging }}
+        {{#if logging.bucketName }}
         Logging:
           # the logs bucket name should be ends with s3.awazonaws.com
           Bucket: {{ logging.bucketName }}.s3.amazonaws.com

@@ -18,9 +18,13 @@ Resources:
               SSEAlgorithm: AES256
       {{/if}}
 
+
+      {{#if bucketWebHosting }}
       WebsiteConfiguration:
         IndexDocument: {{ indexPage }}
         ErrorDocument: {{ errorPage }}
+      {{/if}}
+
 
       {{#if blockPublicAccess }}
       PublicAccessBlockConfiguration:

@@ -8,7 +8,9 @@ module.exports = {
    *
    */
   addExternalsPlugins() {
-    this.serverless.pluginManager.addPlugin(ServerlessS3Sync);
+    if (!_.isEmpty(this.cfg.syncLocalFolder)) {
+      this.serverless.pluginManager.addPlugin(ServerlessS3Sync);
+    }
     this.serverless.pluginManager.addPlugin(ServerlessCloudfrontInvalidate);
   },
 
@@ -17,19 +19,21 @@ module.exports = {
    *
    */
   configureExternalPlugins() {
-    const s3Sync = [
-      {
-        bucketName: this.cfg.bucketName,
-        localDir: this.cfg.syncLocalFolder,
-      },
-    ];
+    if (!_.isEmpty(this.cfg.syncLocalFolder)) {
+      const s3Sync = [
+        {
+          bucketName: this.cfg.bucketName,
+          localDir: this.cfg.syncLocalFolder,
+        },
+      ];
+      _.merge(this.serverless.service.custom, { s3Sync });
+    }
 
     const cloudfrontInvalidate = {
       distributionIdKey: 'CloudFrontDistributionId',
       items: ['/*'],
     };
 
-    _.merge(this.serverless.service.custom, { s3Sync });
     _.merge(this.serverless.service.custom, { cloudfrontInvalidate });
-  }
-}
+  },
+};

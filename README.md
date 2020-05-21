@@ -62,11 +62,12 @@ custom:
     blockPublicAccess: true                       # optional, block public acccess to s3
     bucketEncryption: false                       # optional, bucket encryption for AES256
     bucketVersioning: false                       # optional, assets object versioning (backup)
+    bucketWebHosting: true                        # optional, default true
 
     indexPage: ''                                 # optional, default index.html
-    errorPage: ''                                 # optional, error page
+    errorPage: ''                                 # optional, default index.html
 
-    syncLocalFolder: ''                           # required, folder path to sync with s3
+    syncLocalFolder: ''                           # optional, folder path to sync with s3
     priceClass: ''                                # optional, default 'PriceClass_100'
 
     logging:                                      # optional tag

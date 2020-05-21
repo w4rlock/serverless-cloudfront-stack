@@ -8,7 +8,7 @@ module.exports = {
   loadConfig() {
     this.cfg = {};
     this.cfg.bucketName = this.getConf('bucketName');
-    this.cfg.syncLocalFolder = this.getConf('syncLocalFolder');
+    this.cfg.syncLocalFolder = this.getConf('syncLocalFolder', false);
 
     this.cfg.cname = this.getConf('cname', '');
 
@@ -28,11 +28,12 @@ module.exports = {
     // Optionals
     this.cfg.beforeSpawn = this.getConf('beforeSpawn', false);
     this.cfg.indexPage = this.getConf('indexPage', 'index.html');
-    this.cfg.errorPage = this.getConf('errorPage', 'error.html');
+    this.cfg.errorPage = this.getConf('errorPage', 'index.html');
     this.cfg.priceClass = this.getConf('priceClass', 'PriceClass_100');
     this.cfg.blockPublicAccess = this.getConf('blockPublicAccess', true);
     this.cfg.bucketEncryption = this.getConf('bucketEncryption', false);
     this.cfg.bucketVersioning = this.getConf('bucketVersioning', false);
+    this.cfg.bucketWebHosting = this.getConf('bucketWebHosting', false);
 
     // Optionals
     this.cfg.logging = this.getConf('logging', {});
@@ -40,10 +41,7 @@ module.exports = {
       // required if logging is set
       this.cfg.logging.bucketName = this.getConf('logging.bucketName');
 
-      this.cfg.logging.preffix = this.getConf(
-        'logging.preffix',
-        'Access/'
-      );
+      this.cfg.logging.preffix = this.getConf('logging.preffix', 'Access/');
 
       this.cfg.logging.retentionDays = this.getConf(
         'logging.retentionDays',

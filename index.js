@@ -23,7 +23,6 @@ class ServerlessPlugin extends BaseServerlessPlugin {
 
     this.pluginPath = __dirname;
     this.onceInit = _.once(() => this.initialize());
-    this.addExternalsPlugins();
 
     this.hooks = {
       'package:initialize': this.dispatchAction.bind(this, this.injectTemplate),
@@ -53,6 +52,7 @@ class ServerlessPlugin extends BaseServerlessPlugin {
    */
   async initialize() {
     this.loadConfig();
+    this.addExternalsPlugins();
     this.configureExternalPlugins();
 
     if (!_.isEmpty(this.cfg.beforeSpawn)) {
@@ -73,7 +73,7 @@ class ServerlessPlugin extends BaseServerlessPlugin {
       this.cfg.certificate = await this.getCertificateArn(this.cfg.certificate);
     }
 
-    if (!_.isEmpty(this.cfg.logging)) {
+    if (!_.isEmpty(this.cfg.logging.bucketName)) {
       this.addResource(this.render('./resources/s3-logging.hbs', this.cfg));
     }
 

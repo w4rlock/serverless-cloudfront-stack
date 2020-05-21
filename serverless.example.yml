@@ -28,8 +28,13 @@ custom:
     # bucket Object history for your assets
     bucketVersioning: false
 
+    # default true
+    bucketWebHosting: false
+    # optional if not bucketWebHosting
     indexPage: index.html
+    # optional if not bucketWebHosting
     errorPage: error.html
+    # optional
     syncLocalFolder: dist
 
     # optional default PriceClass_100
