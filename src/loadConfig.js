@@ -34,6 +34,7 @@ module.exports = {
     this.cfg.bucketEncryption = this.getConf('bucketEncryption', false);
     this.cfg.bucketVersioning = this.getConf('bucketVersioning', false);
     this.cfg.bucketWebHosting = this.getConf('bucketWebHosting', false);
+    this.cfg.bucketCorsEnabled = this.getConf('bucketCorsEnabled', false);
 
     // Optionals
     this.cfg.logging = this.getConf('logging', {});

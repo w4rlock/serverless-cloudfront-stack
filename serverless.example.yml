@@ -28,6 +28,9 @@ custom:
     # bucket Object history for your assets
     bucketVersioning: false
 
+    # Support for Cross-Origin Resource Sharing.
+    bucketCorsEnabled: false
+
     # default true
     bucketWebHosting: false
     # optional if not bucketWebHosting

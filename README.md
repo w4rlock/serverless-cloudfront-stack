@@ -21,7 +21,8 @@ S3
 - Bucket encryption support for AES256.
 - Bucket versioning for your assets.
 - Bucket for cdn access logs.
-- Data rentention by days for access logs.
+- Bucket Cors.
+- Data rentention for access logs.
 
 Cloud Front Distribution
 - SSL support.
@@ -62,6 +63,7 @@ custom:
     blockPublicAccess: true                       # optional, block public acccess to s3
     bucketEncryption: false                       # optional, bucket encryption for AES256
     bucketVersioning: false                       # optional, assets object versioning (backup)
+    bucketCorsEnabled: false                      # optional, enable cors default false
     bucketWebHosting: true                        # optional, default true
 
     indexPage: ''                                 # optional, default index.html

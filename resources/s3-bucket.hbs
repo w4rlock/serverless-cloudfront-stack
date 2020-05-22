@@ -19,6 +19,24 @@ Resources:
       {{/if}}
 
 
+      {{#if bucketCorsEnabled }}
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - "*"
+            AllowedOrigins:
+              - "*"
+            AllowedMethods:
+              - GET
+            ExposedHeaders:
+              - x-amz-server-side-encryption
+              - x-amz-request-id
+              - x-amz-id-2
+            MaxAge: 3000
+      {{/if}}
+
+
+
       {{#if bucketWebHosting }}
       WebsiteConfiguration:
         IndexDocument: {{ indexPage }}

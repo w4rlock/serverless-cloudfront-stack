@@ -8,9 +8,7 @@ module.exports = {
    *
    */
   addExternalsPlugins() {
-    if (!_.isEmpty(this.cfg.syncLocalFolder)) {
-      this.serverless.pluginManager.addPlugin(ServerlessS3Sync);
-    }
+    this.serverless.pluginManager.addPlugin(ServerlessS3Sync);
     this.serverless.pluginManager.addPlugin(ServerlessCloudfrontInvalidate);
   },
 
