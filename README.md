@@ -27,6 +27,7 @@ S3
 Cloud Front Distribution
 - SSL support.
 - Access Logs.
+- Cors support.
 - Cname support.
 
 Route53 - Domain Name
