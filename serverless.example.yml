@@ -29,7 +29,7 @@ custom:
     bucketVersioning: false
 
     # Support for Cross-Origin Resource Sharing.
-    bucketCorsEnabled: false
+    enableCors: false
 
     # default true
     bucketWebHosting: false

@@ -12,12 +12,18 @@ Resources:
         {{/if}}
         DefaultCacheBehavior:
           AllowedMethods:
-            - HEAD
             - GET
+            - HEAD
             - OPTIONS
           TargetOriginId: "s3-{{ bucketName }}"
           Compress: true
           ForwardedValues:
+            {{#if enableCors}}
+            Headers:
+              - Access-Control-Request-Method
+              - Access-Control-Request-Headers
+              - Origin
+            {{/if}}
             QueryString: false
             Cookies:
               Forward: none
@@ -41,6 +47,7 @@ Resources:
           CloudFrontDefaultCertificate: 'true'
           {{/if}}
 
+
         IPV6Enabled: false
         Origins:
           - DomainName:
@@ -49,6 +56,7 @@ Resources:
             S3OriginConfig:
               OriginAccessIdentity:
                 Fn::Sub: "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}"
+
 
         {{#if bucketWebHosting}}
         CustomErrorResponses:
@@ -60,12 +68,14 @@ Resources:
             ResponsePagePath: /{{ indexPage }}
         {{/if}}
 
+
         {{#if logging.bucketName }}
         Logging:
           # the logs bucket name should be ends with s3.awazonaws.com
           Bucket: {{ logging.bucketName }}.s3.amazonaws.com
           Prefix: {{ logging.preffix }}
         {{/if}}
+
 
 Outputs:
   CloudFrontDomain:

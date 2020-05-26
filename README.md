@@ -60,14 +60,14 @@ custom:
     certificate: ''                               # required, if use cname
 
     bucketName: ''                                # required, app bucket name
+    enableCors: false                             # optional, enable cors default false
     blockPublicAccess: true                       # optional, block public acccess to s3
     bucketEncryption: false                       # optional, bucket encryption for AES256
     bucketVersioning: false                       # optional, assets object versioning (backup)
-    bucketCorsEnabled: false                      # optional, enable cors default false
-    bucketWebHosting: true                        # optional, default true
 
     indexPage: ''                                 # optional, default index.html
     errorPage: ''                                 # optional, default index.html
+    bucketWebHosting: true                        # optional, default true
 
     syncLocalFolder: ''                           # optional, folder path to sync with s3
     priceClass: ''                                # optional, default 'PriceClass_100'
