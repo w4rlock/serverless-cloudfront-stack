@@ -108,7 +108,7 @@ resources:
 ```
 
 ## Donation
-If this project help you reduce time to develop, you can buy me a :beer: every tiny cents help me a lot :beer: :beer: 
-
+Donate helps me to continue adding new features or bugs fix..
+If this project help you reduce time to develop, you can buy me a :beer: every tiny cents help me a lot :beer: :beer: ... Thanks!
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=278YCRJXTXLXJ)
 
