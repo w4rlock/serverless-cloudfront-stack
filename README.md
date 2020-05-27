@@ -109,7 +109,7 @@ resources:
 
 ## Donation
 Donate helps me to continue adding new features or bugs fix..
-If this project help you reduce time to develop, you can buy me a :beer: IPA... Every tiny cents help me a lot ... Thanks!
+If this project help you reduce time to develop, you can donate me a IPA :beer:...
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=278YCRJXTXLXJ)
 
