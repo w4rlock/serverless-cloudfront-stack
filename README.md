@@ -79,8 +79,46 @@ custom:
       preffix: ''                                 # optional, default 'Access/'
       retentionDays: 7                            # optional, default 21 days
 
+```
 
-# psss. check full example in serverless.example.yml file.
+### Simple Example For Static Web App 
+```yaml
+# serverless.yml
+
+custom:
+  cdnStack:
+    cname: 'cdn.dev.domain.com'
+    createInRoute53: true                         # assumptions: exist hosted zone "dev.domain.com"
+    certificate: '*.domain.com'                   # assumptions: exist acm cert "*.domain.com"
+
+    bucketName: 'static-html-web-app'               
+    blockPublicAccess: true
+    bucketWebHosting: true 
+
+    syncLocalFolder: './dist'  
+
+          
+```
+
+### Simple Example for Front Resources (webfonts, images, ...)
+```yaml
+# serverless.yml
+
+custom:
+  cdnStack:
+    cname: 'cdn.dev.domain.com'
+    createInRoute53: true                         # assumptions: exist hosted zone "dev.domain.com"
+    certificate: '*.domain.com'                   # assumptions: exist acm cert "*.domain.com"
+
+    bucketName: 'assets-front-resources'               
+    enableCors: true
+    blockPublicAccess: true
+    bucketWebHosting: false
+
+    syncLocalFolder: './dist'  
+
+
+# psss. check full example in serverless.example.yml file.           
 ```
 
 ### Extends
