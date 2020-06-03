@@ -3,12 +3,12 @@ const BaseServerlessPlugin = require('base-serverless-plugin');
 
 const utils = require('./src/utils');
 const externalPlugins = require('./src/externalPlugins');
+const configureApiGateway = require('./src/configureApiGateway');
 const loadConfig = require('./src/loadConfig');
 const awsUtils = require('./src/aws.utils');
 
 const LOG_PREFFIX = '[ServerlessCdnStack] -';
 const USR_CONF = 'cdnStack';
-
 
 class ServerlessPlugin extends BaseServerlessPlugin {
   /**
@@ -19,7 +19,14 @@ class ServerlessPlugin extends BaseServerlessPlugin {
    */
   constructor(serverless, options) {
     super(serverless, options, LOG_PREFFIX, USR_CONF);
-    Object.assign(this, externalPlugins, loadConfig, utils, awsUtils);
+    Object.assign(
+      this,
+      externalPlugins,
+      loadConfig,
+      utils,
+      awsUtils,
+      configureApiGateway
+    );
 
     this.pluginPath = __dirname;
     this.onceInit = _.once(() => this.initialize());
@@ -78,6 +85,11 @@ class ServerlessPlugin extends BaseServerlessPlugin {
       this.addResource(this.render('./resources/s3-logging.hbs', this.cfg));
     }
 
+    if (!_.isEmpty(this.cfg.apigatewayStr)) {
+      await this.configureApiGateway();
+      this.addResource(this.render('./resources/apigateway.hbs', this.cfg));
+    }
+
     this.addResource([
       this.render('./resources/s3-bucket.hbs', this.cfg),
       this.render('./resources/s3-policy.hbs', this.cfg),
@@ -114,7 +126,9 @@ class ServerlessPlugin extends BaseServerlessPlugin {
           }
         });
       }
-      _.merge(cf, res);
+
+      _.merge(cf.Outputs, res.Outputs);
+      _.merge(cf.Resources, res.Resources);
     });
   }
 }
