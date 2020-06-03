@@ -1,0 +1,110 @@
+
+.restApiId: &RestApiId
+  {{#if apigateway.restApiId}}
+  RestApiId: {{apigateway.restApiId}}
+  {{else}}
+  RestApiId:
+    Ref: ApiGatewayRestApi
+  {{/if}}
+
+
+
+
+Resources:
+  {{#if apigateway.createRestApi }}
+  ApiGatewayRestApi:
+    DependsOn:
+      - CloudFrontDistribution
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: {{apigateway.name}}
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+  {{/if}}
+
+
+
+
+  MainApiBasePath:
+    DependsOn:
+      - CloudFrontDistribution
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      <<: *RestApiId
+      ParentId: {{apigateway.parentId}}
+      PathPart: {{apigateway.pathPart}}
+
+
+
+
+  MainApiBasePathAnyMethod:
+    DependsOn:
+      - MainApiBasePath
+    Type: AWS::ApiGateway::Method
+    Properties:
+      <<: *RestApiId
+      AuthorizationType: NONE
+      HttpMethod: ANY
+      Integration:
+        IntegrationHttpMethod: ANY
+        Type: HTTP_PROXY
+        Uri:
+          Fn::Sub: 'https://{{apigateway.proxyEndpoint}}'
+        PassthroughBehavior: WHEN_NO_MATCH
+      MethodResponses:
+        - StatusCode: 200
+      ResourceId:
+        Ref: MainApiBasePath
+
+
+
+
+  MainApiProxyPath:
+    DependsOn:
+      - MainApiBasePath
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      <<: *RestApiId
+      ParentId:
+        Ref: MainApiBasePath
+      PathPart: "{proxy+}"
+
+
+
+
+  MainApiProxyAnyMethod:
+    DependsOn:
+      - MainApiProxyPath
+    Type: AWS::ApiGateway::Method
+    Properties:
+      <<: *RestApiId
+      AuthorizationType: NONE
+      HttpMethod: ANY
+      Integration:
+        IntegrationHttpMethod: ANY
+        Type: HTTP_PROXY
+        Uri:
+          Fn::Sub: 'https://{{apigateway.proxyEndpoint}}/{proxy}'
+        PassthroughBehavior: WHEN_NO_MATCH
+        RequestParameters:
+          "integration.request.path.proxy": "method.request.path.proxy"
+      MethodResponses:
+        - StatusCode: 200
+      RequestParameters:
+        "method.request.path.proxy": true
+      ResourceId:
+        Ref: MainApiProxyPath
+
+
+
+
+  ApiGatewayDeployment:
+    DependsOn:
+      - MainApiBasePathAnyMethod
+      - MainApiProxyAnyMethod
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      <<: *RestApiId
+      StageName: {{apigateway.stage}}
+

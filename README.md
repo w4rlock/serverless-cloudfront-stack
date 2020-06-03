@@ -60,6 +60,8 @@ custom:
     createInRoute53: false                        # optional, default false, create cname record
     certificate: ''                               # required, if use cname
 
+    apigateway: ''                                # optional, use apigateway as http_proxy to cloudfront
+
     bucketName: ''                                # required, app bucket name
     enableCors: false                             # optional, enable cors default false
     blockPublicAccess: true                       # optional, block public acccess to s3
