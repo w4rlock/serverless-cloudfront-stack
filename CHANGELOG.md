@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/w4rlock/serverless-cdn-stack/compare/0.4.1...0.5.0) (2020-06-03)
+
+
+### Features
+
+* add apigateway ([5478903](https://github.com/w4rlock/serverless-cdn-stack/commit/5478903f717ff51287ac39ab780b4e87e8056f3b))
+
+
+### Bug Fixes
+
+* readme ([7cb5ce2](https://github.com/w4rlock/serverless-cdn-stack/commit/7cb5ce26b9cc45ec75376b1452b40acdc625074f))
+
 ### [0.4.1](https://github.com/w4rlock/serverless-cdn-stack/compare/0.4.0...0.4.1) (2020-05-26)
 
 
