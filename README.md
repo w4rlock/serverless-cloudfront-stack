@@ -83,7 +83,7 @@ custom:
 
 ```
 
-### Simple Example For Static Web App 
+### Simple Example For Static Web App with Route53
 ```yaml
 # serverless.yml
 
@@ -93,13 +93,30 @@ custom:
     createInRoute53: true                         # assumptions: exist hosted zone "dev.domain.com"
     certificate: '*.domain.com'                   # assumptions: exist acm cert "*.domain.com"
 
-    bucketName: 'static-html-web-app'               
+    bucketName: 'static-html-web-app'
     blockPublicAccess: true
-    bucketWebHosting: true 
+    bucketWebHosting: true
 
-    syncLocalFolder: './dist'  
+    syncLocalFolder: './dist'
 
-          
+
+```
+### Simple Example For Static Web App with ApiGateway (multiple front approach)
+```yaml
+# serverless.yml
+# assumptions: should be exists the apigateway and stage
+
+custom:
+  cdnStack:
+    apigateway: apigateway-name:stage-dev/new-front-app
+
+    bucketName: 'static-html-web-app'
+    blockPublicAccess: true
+    bucketWebHosting: true
+
+    syncLocalFolder: './dist'
+
+
 ```
 
 ### Simple Example for Front Resources (webfonts, images, ...)
@@ -112,15 +129,15 @@ custom:
     createInRoute53: true                         # assumptions: exist hosted zone "dev.domain.com"
     certificate: '*.domain.com'                   # assumptions: exist acm cert "*.domain.com"
 
-    bucketName: 'assets-front-resources'               
+    bucketName: 'assets-front-resources'
     enableCors: true
     blockPublicAccess: true
     bucketWebHosting: false
 
-    syncLocalFolder: './dist'  
+    syncLocalFolder: './dist'
 
 
-# psss. check full example in serverless.example.yml file.           
+# psss. check full example in serverless.example.yml file.
 ```
 
 ### Extends
