@@ -31,8 +31,9 @@ Cloud Front Distribution
 - Cors support.
 - Cname support.
 
-Route53 - Domain Name
-- Record for your CDN.
+Dns Alias
+- Route53 - Record for your CDN.
+- ApiGateway - New Path for your CDN
 
 Extras
 - Invalidate CloudFront cache on new deploys.
@@ -104,7 +105,8 @@ custom:
 ### Simple Example For Static Web App with ApiGateway (multiple front approach)
 ```yaml
 # serverless.yml
-# assumptions: should be exists the apigateway and stage
+# Your front-app will be accessed through api gateway
+# Assumptions: should be exists the apigateway and stage
 
 custom:
   cdnStack:
