@@ -82,7 +82,7 @@ custom:
 
 ### Simple Example For Static Web App with Route53
 <p align="center">
-  <img alt="Aws Designer" width="780" height="540" src="https://user-images.githubusercontent.com/621906/85138625-7845fa80-b219-11ea-97f3-852f5d21b404.png">
+  <img alt="Aws Designer" width="830" height="540" src="https://user-images.githubusercontent.com/621906/85138625-7845fa80-b219-11ea-97f3-852f5d21b404.png">
 </p>
 
 ```yaml
@@ -104,7 +104,7 @@ custom:
 ```
 ### Simple Example For Static Web App with ApiGateway (multiple front approach)
 <p align="center">
-  <img alt="Aws Designer" width="780" height="540" src="https://user-images.githubusercontent.com/621906/85138617-74b27380-b219-11ea-8beb-118e2c4e427d.png">
+  <img alt="Aws Designer" width="830" height="540" src="https://user-images.githubusercontent.com/621906/85138617-74b27380-b219-11ea-8beb-118e2c4e427d.png">
 </p>
 
 ```yaml
@@ -127,7 +127,7 @@ custom:
 
 ### Simple Example for Front Resources (webfonts, images, ...)
 <p align="center">
-  <img alt="Aws Designer" width="780" height="540" src="https://user-images.githubusercontent.com/621906/85138626-78de9100-b219-11ea-86a3-e79c0066a3f2.png">
+  <img alt="Aws Designer" width="830" height="540" src="https://user-images.githubusercontent.com/621906/85138626-78de9100-b219-11ea-86a3-e79c0066a3f2.png">
 </p>
 
 ```yaml
