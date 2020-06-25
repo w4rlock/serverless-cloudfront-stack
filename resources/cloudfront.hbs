@@ -41,7 +41,7 @@ Resources:
         # required for cname field
         ViewerCertificate:
           {{#if certificate}}
-          AcmCertificateArn: {{ certificate }}
+          AcmCertificateArn: "{{ certificate }}"
           SslSupportMethod: sni-only
           {{else}}
           CloudFrontDefaultCertificate: 'true'

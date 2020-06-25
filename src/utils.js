@@ -4,6 +4,14 @@ const handlebars = require('handlebars');
 const path = require('path');
 
 module.exports = {
+  /**
+   * Sleep is an alias to setTimeout
+   *
+   * @param {Number} ms milliseconds
+   */
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  },
   /*
    * Read file
    *

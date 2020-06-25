@@ -27,7 +27,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "base-serverless-plugin": "0.1.5",
+    "@hapi/joi": "17.1.1",
+    "base-serverless-plugin": "0.2.0",
+    "domain-info": "0.1.2",
     "handlebars": "4.7.6",
     "js-yaml": "3.13.1",
     "lodash": "^4.17.15",

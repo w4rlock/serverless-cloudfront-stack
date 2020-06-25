@@ -6,6 +6,8 @@ const externalPlugins = require('./src/externalPlugins');
 const configureApiGateway = require('./src/configureApiGateway');
 const loadConfig = require('./src/loadConfig');
 const awsUtils = require('./src/aws.utils');
+const certificate = require('./src/certificate');
+const route53 = require('./src/route53');
 
 const LOG_PREFFIX = '[ServerlessCdnStack] -';
 const USR_CONF = 'cdnStack';
@@ -25,7 +27,9 @@ class ServerlessPlugin extends BaseServerlessPlugin {
       loadConfig,
       utils,
       awsUtils,
-      configureApiGateway
+      configureApiGateway,
+      certificate,
+      route53
     );
 
     this.pluginPath = __dirname;
@@ -35,6 +39,7 @@ class ServerlessPlugin extends BaseServerlessPlugin {
 
     this.hooks = {
       'package:initialize': this.dispatchAction.bind(this, this.injectTemplate),
+      'before:deploy:deploy': this.dispatchAction.bind(this, this.beforeDeploy),
     };
   }
 
@@ -42,6 +47,7 @@ class ServerlessPlugin extends BaseServerlessPlugin {
    * Action Wrapper check plugin condition before perform action
    *
    * @param {function} funAction serverless plugin action
+   *
    */
   async dispatchAction(funAction, varResolver = undefined) {
     if (this.isPluginDisabled()) {
@@ -52,6 +58,15 @@ class ServerlessPlugin extends BaseServerlessPlugin {
     await this.onceInit();
 
     return funAction.call(this, varResolver);
+  }
+
+  /**
+   * Before Deploy Hooks
+   *
+   */
+  async beforeDeploy() {
+    await this.validateResources();
+    await this.handleCert();
   }
 
   /**
@@ -76,11 +91,6 @@ class ServerlessPlugin extends BaseServerlessPlugin {
    *
    */
   async injectTemplate() {
-    // when use a cnme for cdn is required a ssl cert arn
-    if (this.cfg.resolveCertificateArn) {
-      this.cfg.certificate = await this.getCertificateArn(this.cfg.certificate);
-    }
-
     if (!_.isEmpty(this.cfg.logging.bucketName)) {
       this.addResource(this.render('./resources/s3-logging.hbs', this.cfg));
     }
