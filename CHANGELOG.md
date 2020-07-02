@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/w4rlock/serverless-cdn-stack/compare/0.5.0...0.6.0) (2020-07-02)
+
+
+### Features
+
+* certificate and validations ([9e5c869](https://github.com/w4rlock/serverless-cdn-stack/commit/9e5c869c88a67954d633109c3712370872228cfc))
+
+
+### Bug Fixes
+
+* add cert ([5df5f07](https://github.com/w4rlock/serverless-cdn-stack/commit/5df5f07fa5e67131341b56316d0a4dd85e280fe4))
+
 ## [0.5.0](https://github.com/w4rlock/serverless-cdn-stack/compare/0.4.1...0.5.0) (2020-06-03)
 
 
