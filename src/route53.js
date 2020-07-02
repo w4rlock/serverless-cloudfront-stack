@@ -14,7 +14,7 @@ module.exports = {
    * @param {string} zoneId hosted zone id
    * @param {object} record record object { Name, Type, Value }
    */
-  async createRecordIfNeed(zoneId, record) {
+  async upsertDnsRecord(zoneId, record) {
     if (!zoneId) {
       throw new Error('param "zoneId" is required');
     }
@@ -25,41 +25,27 @@ module.exports = {
     }
 
     const aws = this.serverless.getProvider('aws');
-    const listOpts = {
-      MaxItems: '10',
+    const Changes = [
+      {
+        Action: 'UPSERT',
+        ResourceRecordSet: {
+          Name: record.Name,
+          Type: record.Type,
+          TTL: 300,
+          ResourceRecords: [
+            {
+              Value: record.Value,
+            },
+          ],
+        },
+      },
+    ]
+
+    const recordOpts = {
       HostedZoneId: zoneId,
-      StartRecordName: record.Name,
+      ChangeBatch: { Changes },
     };
 
-    const resp = await aws.request(
-      'Route53',
-      'listResourceRecordSets',
-      listOpts
-    );
-
-    if (resp.ResourceRecordSets.length < 1) {
-      const Changes = [
-        {
-          Action: 'UPSERT',
-          ResourceRecordSet: {
-            Name: record.Name,
-            Type: record.Type,
-            TTL: 300,
-            ResourceRecords: [
-              {
-                Value: record.Value,
-              },
-            ],
-          },
-        },
-      ]
-
-      const recordOpts = {
-        HostedZoneId: zoneId,
-        ChangeBatch: { Changes },
-      };
-
-      await aws.request('Route53', 'changeResourceRecordSets', recordOpts);
-    }
+    await aws.request('Route53', 'changeResourceRecordSets', recordOpts);
   },
 };

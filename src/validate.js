@@ -6,7 +6,7 @@ module.exports = {
    *
    */
   async validateResources() {
-    await this.validateBucketS3()
+    await this.validateBucketS3();
   },
 
   /**
@@ -16,12 +16,13 @@ module.exports = {
    */
   async validateBucketS3() {
     const stack = this.describeStack();
-    if (_.isEmpty(stack)) {
-      const appBucket = this.cfg.bucketName
-      const logBucket = this.logging.bucketName
 
-      await this.throwIfBucketExists(appBucket)
-      await this.throwIfBucketExists(logBucket)
+    if (_.isEmpty(stack)) {
+      const appBucket = this.cfg.bucketName;
+      const logBucket = _.get(this.cfg, 'logging.bucketName');
+
+      await this.throwIfBucketExists(appBucket);
+      await this.throwIfBucketExists(logBucket);
     }
   },
 
@@ -32,10 +33,19 @@ module.exports = {
    */
   async throwIfBucketExists(bucketName) {
     if (!_.isEmpty(bucketName)) {
+      this.log(`Validating s3 bucket "${bucketName}"`);
 
-      const exists = await this.existsBucket(this.cfg.bucketName)
-      if (_.isEmpty(exists)) {
-        throw new Error(`Bucket exits ${bucketName}`);
+      const exists = await this.existsBucket(bucketName);
+
+      if (exists) {
+        let err = '';
+        err += 'S3_BUCKET_EXISTS\n';
+        err += 'Cannot create an existing resource. \n';
+        err += 'Be Careful \n\n';
+        err += `aws s3 rm s3://${bucketName} --recursive \n`;
+        err += `aws s3 rb s3://${bucketName} \n`;
+
+        throw new Error(err);
       }
     }
   },
@@ -46,16 +56,16 @@ module.exports = {
    * @param {string} bucketName bucket name to check
    */
   async existsBucket(bucketName) {
-    let res;
     const aws = this.serverless.getProvider('aws');
+    let res = false;
 
     try {
-      res = await aws.request('s3', 'headBucket', { BucketName: bucketName })
-    }
-    catch(err) {
-      res = ''
+      await aws.request('S3', 'headBucket', { Bucket: bucketName });
+      res = true;
+    } catch (err) {
+      res = false;
     }
 
     return res;
-  }
-}
+  },
+};

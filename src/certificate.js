@@ -12,6 +12,7 @@ module.exports = {
    */
   async handleCert() {
     let zoneId;
+    let certificateArn;
 
     try {
       zoneId = await this.getHostedZoneId(this.cfg.cname);
@@ -19,45 +20,51 @@ module.exports = {
     } catch (e) {}
 
     // user can forced to use an specific arn!
+    // useful for duplicates certs.
     if (this.cfg.resolveCertificateArn) {
       // when use a cname for cdn is required a ssl cert arn
-      const crtArn = await this.createCertificateIfNeed(this.cfg.certificate);
+      certificateArn = await this.createCertificateIfNeed(this.cfg.certificate);
       // if cert domain is amazon.. this will create dns record to validate it
-      const cert = await this.describeCertificateByArn(crtArn);
+      const cert = await this.describeCertificateByArn(certificateArn);
 
       if (cert.Status === Status.PENDING_VALIDATION) {
         const rec = cert.DomainValidationOptions.find(
-          ({ DomainName }) => this.cfg.certificate === DomainName
-        ).ResourceRecord;
+          (dns) => this.cfg.certificate === dns.DomainName
+        );
 
         // if hosted zone exists will create records to validate certificate
         // if not exits maybe domain is handled for another cloud provider
         if (zoneId) {
-          await this.createRecordIfNeed(zoneId, rec);
-          this.log('=======================================');
-          this.log('The DNS record was written to your Route 53 hosted zone. ');
-          this.log('It can take 30 minutes or longer for the changes to ');
-          this.log('propagate and for AWS to validate the domain and issue ');
-          this.log('the certificate.');
-          this.log('=======================================');
-          this.log('\n\n');
-
+          await this.upsertDnsRecord(zoneId, rec.ResourceRecord);
           const region = this.getRegion();
-          this.log(
-            `https://console.aws.amazon.com/acm/home?region=${region}\n`
-          );
+
+          let msg = '\n';
+          msg += '=======================================================\n';
+          msg += 'The DNS record was written to your Route 53 hosted zone.\n';
+          msg += 'It can take 30 minutes or longer for the changes to \n';
+          msg += 'propagate and for AWS to validate the domain and issue \n';
+          msg += 'the certificate. \n';
+          msg += '=======================================================\n';
+          msg += 'https://console.aws.amazon.com/acm/home?region=';
+          msg += region;
+          msg += '\n\n';
+
+          this.log(msg);
+
           // 180 retries every 20 seconds (timeout max 60min)
-          await this.waitForIssueCertificate(180, crtArn);
+          await this.waitForIssueCertificate(180, certificateArn);
         } else {
-          this.log('');
-          this.log(
-            'To SSL Certificate validation.. create next record in your dns provider.'
-          );
-          this.log(`${rec.Name}  ${rec.Type}  ${rec.Value}`);
-          this.log('');
+          let msg = '\n\n';
+          msg += 'To Certificate validation ';
+          msg += 'Create next record in your dns provider. \n';
+          msg += `${rec.Name}  ${rec.Type}  ${rec.Value} \n`;
+
+          this.log(msg);
         }
       }
     }
+
+    return certificateArn;
   },
 
   /**
@@ -155,6 +162,7 @@ module.exports = {
     const resp = await acm.requestCertificate(params).promise();
     return resp.CertificateArn;
   },
+
 
   /**
    * Get Acm Certificate

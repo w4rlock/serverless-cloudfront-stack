@@ -1,8 +1,14 @@
 service: cdn-stack
 provider: aws
+  deploymentBucket:
+    name: sls.tst.teamname.us-east-1.aws.com
+    blockPublicAccess: true
+
 
 plugins:
   - serverless-cloudfront-stack
+  - serverless-deployment-bucket
+
 
 custom:
   cdnStack:

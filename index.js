@@ -8,6 +8,7 @@ const loadConfig = require('./src/loadConfig');
 const awsUtils = require('./src/aws.utils');
 const certificate = require('./src/certificate');
 const route53 = require('./src/route53');
+const validate = require('./src/validate');
 
 const LOG_PREFFIX = '[ServerlessCdnStack] -';
 const USR_CONF = 'cdnStack';
@@ -29,7 +30,8 @@ class ServerlessPlugin extends BaseServerlessPlugin {
       awsUtils,
       configureApiGateway,
       certificate,
-      route53
+      route53,
+      validate
     );
 
     this.pluginPath = __dirname;
@@ -38,8 +40,11 @@ class ServerlessPlugin extends BaseServerlessPlugin {
     this.addExternalsPlugins();
 
     this.hooks = {
+      'before:package:initialize': this.dispatchAction.bind(
+        this,
+        this.beforeInitialize
+      ),
       'package:initialize': this.dispatchAction.bind(this, this.injectTemplate),
-      'before:deploy:deploy': this.dispatchAction.bind(this, this.beforeDeploy),
     };
   }
 
@@ -64,9 +69,9 @@ class ServerlessPlugin extends BaseServerlessPlugin {
    * Before Deploy Hooks
    *
    */
-  async beforeDeploy() {
+  async beforeInitialize() {
     await this.validateResources();
-    await this.handleCert();
+    this.cfg.certificate = await this.handleCert();
   }
 
   /**
