@@ -37,14 +37,15 @@ module.exports = {
     this.cfg.enableCors = this.getConf('enableCors', false);
     this.cfg.apigatewayStr = this.getConf('apigateway', '');
 
+    // Web Application Firewall
+    this.cfg.waf = this.getConf('waf', '');
+
     // Optionals
     this.cfg.logging = this.getConf('logging', {});
     if (!_.isEmpty(this.cfg.logging)) {
       // required if logging is set
       this.cfg.logging.bucketName = this.getConf('logging.bucketName');
-
       this.cfg.logging.preffix = this.getConf('logging.preffix', 'Access/');
-
       this.cfg.logging.retentionDays = this.getConf(
         'logging.retentionDays',
         21

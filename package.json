@@ -32,7 +32,7 @@
     "domain-info": "0.1.2",
     "handlebars": "4.7.6",
     "js-yaml": "3.13.1",
-    "lodash": "^4.17.15",
+    "lodash": "4.17.19",
     "npx": "^10.2.2",
     "rm": "^0.1.8",
     "serverless-cloudfront-invalidate": "1.4.0",
@@ -53,6 +53,6 @@
     "lint-staged": "10.0.8",
     "prettier": "2.0.1",
     "serverless-deployment-bucket": "^1.1.2",
-    "standard-version": "7.1.0"
+    "standard-version": "8.0.2"
   }
 }
