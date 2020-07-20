@@ -15,7 +15,7 @@ module.exports = {
    *
    */
   async validateBucketS3() {
-    const stack = this.describeStack();
+    const stack = await this.describeStack();
 
     if (_.isEmpty(stack)) {
       const appBucket = this.cfg.bucketName;
