@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/w4rlock/serverless-cdn-stack/compare/0.6.0...0.6.1) (2020-07-20)
+
+
+### Features
+
+* fix await bucket validation ([d55625a](https://github.com/w4rlock/serverless-cdn-stack/commit/d55625a7d042ec7d3ccdfaa9952be220777ca472))
+
+
+### Bug Fixes
+
+* update libs ([5cb3dd1](https://github.com/w4rlock/serverless-cdn-stack/commit/5cb3dd14628b35d3d6b69915f12f02932407a006))
+
 ## [0.6.0](https://github.com/w4rlock/serverless-cdn-stack/compare/0.5.0...0.6.0) (2020-07-02)
 
 
