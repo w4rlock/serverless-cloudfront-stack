@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.2](https://github.com/w4rlock/serverless-cdn-stack/compare/0.6.1...0.6.2) (2020-07-22)
+
+
+### Features
+
+* add forward headers ([aa8c2a4](https://github.com/w4rlock/serverless-cdn-stack/commit/aa8c2a4a59be534f414faf43d287e488e129a35d))
+
 ### [0.6.1](https://github.com/w4rlock/serverless-cdn-stack/compare/0.6.0...0.6.1) (2020-07-20)
 
 
