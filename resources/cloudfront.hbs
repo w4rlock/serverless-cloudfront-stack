@@ -18,6 +18,13 @@ Resources:
           TargetOriginId: "s3-{{ bucketName }}"
           Compress: true
           ForwardedValues:
+            {{#if forwardHeaders}}
+            Headers:
+              {{#each forwardHeaders}}
+              - {{ this }}
+              {{/each}}
+            {{/if}}
+
             {{#if enableCors}}
             Headers:
               - Access-Control-Request-Method

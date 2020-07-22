@@ -35,6 +35,7 @@ module.exports = {
     this.cfg.bucketVersioning = this.getConf('bucketVersioning', false);
     this.cfg.bucketWebHosting = this.getConf('bucketWebHosting', false);
     this.cfg.enableCors = this.getConf('enableCors', false);
+    this.cfg.forwardHeaders = this.getConf('forwardHeaders', '');
     this.cfg.apigatewayStr = this.getConf('apigateway', '');
 
     // Web Application Firewall
