@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.3](https://github.com/w4rlock/serverless-cdn-stack/compare/0.6.2...0.6.3) (2020-07-23)
+
+
+### Features
+
+* add cors ([0d464f3](https://github.com/w4rlock/serverless-cdn-stack/commit/0d464f348238a750b0c3b81e2a869fae6c6ca8d2))
+
 ### [0.6.2](https://github.com/w4rlock/serverless-cdn-stack/compare/0.6.1...0.6.2) (2020-07-22)
 
 
