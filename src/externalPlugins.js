@@ -1,22 +1,21 @@
 const _ = require('lodash');
-const ServerlessCloudfrontInvalidate = require('serverless-cloudfront-invalidate');
-const ServerlessS3Sync = require('serverless-s3-sync');
 
 module.exports = {
-  /**
-   * Add Third Party Plugins to serverless lifecycle
-   *
-   */
-  addExternalsPlugins() {
-    this.serverless.pluginManager.addPlugin(ServerlessS3Sync);
-    this.serverless.pluginManager.addPlugin(ServerlessCloudfrontInvalidate);
-  },
-
   /**
    * Third Party Plugins Configuration
    *
    */
   configureExternalPlugins() {
+    this.configureS3Sync();
+    this.configureCloudFrontInvalidation();
+    this.configureCertificate();
+  },
+
+  /**
+   * Config for Sync a local folder with s3
+   *
+   */
+  configureS3Sync() {
     if (!_.isEmpty(this.cfg.syncLocalFolder)) {
       const s3Sync = [
         {
@@ -24,14 +23,35 @@ module.exports = {
           localDir: this.cfg.syncLocalFolder,
         },
       ];
-      _.merge(this.serverless.service.custom, { s3Sync });
-    }
 
+      this.addDefaultCustomConfig({ s3Sync });
+    }
+  },
+
+  /**
+   * Config for CloudFront Cache Invalidation
+   *
+   */
+  configureCloudFrontInvalidation() {
     const cloudfrontInvalidate = {
       distributionIdKey: 'CloudFrontDistributionId',
       items: ['/*'],
     };
 
-    _.merge(this.serverless.service.custom, { cloudfrontInvalidate });
+    this.addDefaultCustomConfig({ cloudfrontInvalidate });
+  },
+
+  /**
+   * Config for Acm Https Certificate Creation and Validation.
+   *
+   */
+  configureCertificate() {
+    const certificate = {
+      disableLifecycleHooks: true,
+      domain: this.cfg.cname,
+      name: this.cfg.certificate,
+    };
+
+    this.addDefaultCustomConfig({ certificate });
   },
 };

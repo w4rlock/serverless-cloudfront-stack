@@ -73,6 +73,11 @@ custom:
     syncLocalFolder: ''                           # optional, folder path to sync with s3
     priceClass: ''                                # optional, default 'PriceClass_100'
 
+    forwardHeaders:                               # optional, forward http headers
+      - Origin
+      - Accept-Encoding
+      - Your-Custom-Header
+
     logging:                                      # optional tag
       bucketName: ''                              # required, logs bucket name
       preffix: ''                                 # optional, default 'Access/'

@@ -8,21 +8,17 @@ module.exports = {
   loadConfig() {
     this.cfg = {};
     this.cfg.bucketName = this.getConf('bucketName');
-    this.cfg.syncLocalFolder = this.getConf('syncLocalFolder', false);
+    this.cfg.syncLocalFolder = this.getConf('syncLocalFolder');
 
     this.cfg.cname = this.getConf('cname', '');
 
-    // cname is nil do not create record !
+    // IF USE AN CNAME FOR CLOUDFRONT THE CERTIFICATE IS REQUIRED
     if (_.isEmpty(this.cfg.cname)) {
       this.cfg.createInRoute53 = false;
     } else {
       this.cfg.createInRoute53 = this.getConf('createInRoute53', false);
       // if use cname a ssl certificate is required
       this.cfg.certificate = this.getConf('certificate');
-      // resolve certificate if certificate is a domain name
-      this.cfg.resolveCertificateArn = !this.cfg.certificate.includes(
-        'arn:aws:acm'
-      );
     }
 
     // Optionals
@@ -57,5 +53,16 @@ module.exports = {
         true
       );
     }
+  },
+
+  /**
+   * Needs certificate creation if the user specified un arn the certificate
+   * will be not created
+   *
+   * @param {string} certificate certificate name or arn
+   * @returns {boolean} if needs create certificate
+   */
+  needsCreateCertificate(certificate) {
+    return certificate && !certificate.includes('arn:aws:acm');
   },
 };
