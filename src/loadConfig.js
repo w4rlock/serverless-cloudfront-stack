@@ -18,8 +18,9 @@ module.exports = {
     } else {
       this.cfg.createInRoute53 = this.getConf('createInRoute53', false);
       // if use cname a ssl certificate is required
-      this.cfg.certificate = this.getConf('certificate');
     }
+
+    this.cfg.certificate = this.getConf('certificate');
 
     // Optionals
     this.cfg.beforeSpawn = this.getConf('beforeSpawn', false);
@@ -56,13 +57,13 @@ module.exports = {
   },
 
   /**
-   * Needs certificate creation if the user specified un arn the certificate
+   * if the user specified un arn the certificate or Domain Name
    * will be not created
    *
    * @param {string} certificate certificate name or arn
    * @returns {boolean} if needs create certificate
    */
-  needsCreateCertificate(certificate) {
+  isCertificateWithDomainName(certificate) {
     return certificate && !certificate.includes('arn:aws:acm');
   },
 };

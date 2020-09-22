@@ -28,7 +28,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "17.1.1",
-    "base-serverless-plugin": "0.5.2",
+    "base-serverless-plugin": "0.5.5",
     "domain-info": "0.1.2",
     "handlebars": "4.7.6",
     "js-yaml": "3.13.1",
@@ -36,8 +36,8 @@
     "npx": "^10.2.2",
     "rm": "^0.1.8",
     "serverless-cloudfront-invalidate": "1.4.0",
-    "serverless-https-certificate": "0.0.10",
-    "serverless-s3-sync": "1.12.0"
+    "serverless-s3-sync": "1.12.0",
+    "serverless-waf-association": "0.0.3"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "8.3.4",

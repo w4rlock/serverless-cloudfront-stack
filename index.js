@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const BaseServerlessPlugin = require('base-serverless-plugin');
-const certificatePlugin = require('serverless-https-certificate');
+const certificate = require('./src/certificate');
 const cloudFrontInvalidatePlugin = require('serverless-cloudfront-invalidate');
 const s3SyncPlugin = require('serverless-s3-sync');
 
@@ -29,6 +29,7 @@ class ServerlessPlugin extends BaseServerlessPlugin {
 
     Object.assign(
       this,
+      certificate,
       externalPlugins,
       loadConfig,
       utils,
@@ -54,11 +55,7 @@ class ServerlessPlugin extends BaseServerlessPlugin {
    *
    */
   asyncInit() {
-    this.addPlugins([
-      certificatePlugin,
-      cloudFrontInvalidatePlugin,
-      s3SyncPlugin,
-    ]);
+    this.addPlugins([cloudFrontInvalidatePlugin, s3SyncPlugin]);
   }
 
   /**
@@ -84,8 +81,8 @@ class ServerlessPlugin extends BaseServerlessPlugin {
    */
   async beforeInitialize() {
     await this.validateResources();
-    if (this.needsCreateCertificate(this.cfg.certificate)) {
-      this.cfg.certificate = await this.dispatchHook('certificate:create');
+    if (this.isCertificateWithDomainName(this.cfg.certificate)) {
+      this.cfg.certificate = await this.getCertificateArn(this.cfg.certificate);
     }
   }
 
