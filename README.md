@@ -31,6 +31,10 @@ Cloud Front Distribution
 - Cors support.
 - Cname support.
 
+Acm - Https
+- Certificate Creation.
+- Certificate Validation.
+
 Dns Alias
 - Route53 - Record for your CDN.
 - ApiGateway - New Path for your CDN
