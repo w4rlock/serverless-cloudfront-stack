@@ -1,8 +1,8 @@
 const _ = require('lodash');
 const BaseServerlessPlugin = require('base-serverless-plugin');
-const certificate = require('./src/certificate');
 const cloudFrontInvalidatePlugin = require('serverless-cloudfront-invalidate');
 const s3SyncPlugin = require('serverless-s3-sync');
+const certificate = require('./src/certificate');
 
 const utils = require('./src/utils');
 const externalPlugins = require('./src/externalPlugins');
