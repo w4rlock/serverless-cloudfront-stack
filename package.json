@@ -30,7 +30,7 @@
     "@hapi/joi": "17.1.1",
     "base-serverless-plugin": "0.5.5",
     "domain-info": "0.1.2",
-    "handlebars": "4.7.6",
+    "handlebars": "4.7.7",
     "js-yaml": "3.13.1",
     "lodash": "4.17.19",
     "npx": "^10.2.2",
